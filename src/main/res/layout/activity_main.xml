@@ -19,6 +19,13 @@
         android:id="@+id/button2"
         android:onClick="checkProcesses"/>
 
+    <Button
+        android:id="@+id/otherActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show other"
+        android:onClick="startOtherActivity"/>
+
     <TextView
         android:text="sample"
         android:layout_width="wrap_content"
