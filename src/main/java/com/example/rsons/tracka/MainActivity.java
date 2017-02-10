@@ -73,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
             if (i.getPackageName().contains("katana")) {
                 long timeInForeground = i.getTotalTimeInForeground();
 
-                builder.append(i.getPackageName() + " " + Utils.convertToHours(timeInForeground) + "\n");
-//                Log.d("snippet", i.getPackageName() + " " + Utils.convertToHours(timeInForeground));
+                builder.append(i.getPackageName() + " " + Utils.convertMillisToDuration(timeInForeground) + "\n");
+//                Log.d("snippet", i.getPackageName() + " " + Utils.convertMillisToDuration(timeInForeground));
             }
         }
 

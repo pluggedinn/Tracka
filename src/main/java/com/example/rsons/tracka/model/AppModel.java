@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.airbnb.epoxy.EpoxyModel;
 import com.example.rsons.tracka.R;
-import com.example.rsons.tracka.model.App;
+import com.example.rsons.tracka.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +40,13 @@ public class AppModel extends EpoxyModel<CardView> {
         value.setText(app.getValue());
         icon.setImageResource(app.getImageResId());
         view.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(app.getBackgroundColor())));
+        subtitle.setText("On " + Utils.convertMillisToTime(Long.parseLong(app.getStartTime())));
+
+        if (app.getTitle().contains("Snapchat")) {
+            title.setTextColor(Color.BLACK);
+            subtitle.setTextColor(Color.BLACK);
+            value.setTextColor(Color.BLACK);
+        }
     }
 
     @Override

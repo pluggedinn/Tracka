@@ -12,7 +12,7 @@ import android.view.View;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.rsons.tracka.adapter.AppAdapter;
-import com.example.rsons.tracka.model.AppDataFormatter;
+import com.example.rsons.tracka.model.AppFormatter;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class DatePickerActivity extends AppCompatActivity {
 
         final AppAdapter eAdapter = new AppAdapter();
         recView.setAdapter(eAdapter);
-        // eAdapter.addApps(AppDataFormatter.getListData());
+        // eAdapter.addApps(AppFormatter.getListData());
 
         Calendar lastYear = Calendar.getInstance();
         lastYear.add(Calendar.YEAR, -1);
@@ -64,7 +64,7 @@ public class DatePickerActivity extends AppCompatActivity {
             public void onDateSelected(Date date) {
                 List<Date> selectedDates = calendar.getSelectedDates();
 
-                // eAdapter.clearApps();
+                eAdapter.clearApps();
 
                 if (selectedDates.size() == 1) {
                     Calendar dayBefore = Calendar.getInstance();
@@ -74,14 +74,15 @@ public class DatePickerActivity extends AppCompatActivity {
                     Log.d("END", date.toString());
                     List<UsageStats> data = dataRetriever.getSessionsAllApps(dayBefore.getTimeInMillis(), date.getTime());
                     Log.d("DATA", data.size() + data.toString());
-                    eAdapter.addApps(AppDataFormatter.createApps(data));
+                    eAdapter.addApps(AppFormatter.createApps(data));
 
                 } else {
                     Log.d("START", selectedDates.get(0).toString()+"");
                     Log.d("END", selectedDates.get(selectedDates.size() - 1).toString());
                     List<UsageStats> data = dataRetriever.getSessionsAllApps(selectedDates.get(0).getTime(), selectedDates.get(selectedDates.size() - 1).getTime());
                     Log.d("DATA", data.size() + data.toString());
-                    eAdapter.addApps(AppDataFormatter.createApps(data));
+                    eAdapter.addApps(AppFormatter.createApps(data));
+                    showCalendar(null);
                 }
             }
 

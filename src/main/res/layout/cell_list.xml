@@ -31,8 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/cell_title"
             android:layout_marginTop="8dp"
-            android:text="Time wasted on the day February 1st 2017"
-            android:textColor="#c8ffffff" />
+            android:text="between what time"
+            android:textColor="#ffffff"
+            android:alpha="0.85"/>
 
         <ImageView
             android:id="@+id/cell_icon"
@@ -46,10 +47,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/cell_subtitle"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif"
             android:text="value"
-            android:textColor="#c8ffffff"
+            android:textColor="#ffffff"
+            android:alpha="0.85"
             android:textSize="96dp" />
     </RelativeLayout>
 

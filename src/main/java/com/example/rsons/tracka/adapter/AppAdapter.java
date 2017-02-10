@@ -24,5 +24,6 @@ public class AppAdapter extends EpoxyAdapter {
 
     public void clearApps() {
         models.clear();
+        notifyDataSetChanged();
     }
 }

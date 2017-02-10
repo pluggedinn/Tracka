@@ -1,6 +1,7 @@
 package com.example.rsons.tracka.model;
 
 import com.mikepenz.fastadapter.items.AbstractItem;
+
 import android.support.v7.widget.RecyclerView.ViewHolder;
 
 /**
@@ -13,6 +14,24 @@ public class App {
     private int imageResId;
     private String backgroundColor;
     private String value;
+    private String startTime;
+    private String endTime;
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
     public String getTitle() {
         return name;

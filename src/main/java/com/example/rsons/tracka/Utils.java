@@ -2,6 +2,7 @@ package com.example.rsons.tracka;
 
 import android.content.pm.PackageManager;
 
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -10,12 +11,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Utils {
 
-    public static String convertToHours(long millis) {
-        String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-
-        return hms;
+    public static String convertMillisToDuration(long millis) {
+        if (TimeUnit.MILLISECONDS.toHours(millis) == 0) {
+            return TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)) + "m";
+        } else {
+            return TimeUnit.MILLISECONDS.toHours(millis) + "h " + (TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis))) + "m";
+        }
     }
 
     public static boolean isPackageInstalled(String packagename, PackageManager packageManager) {
@@ -25,5 +26,18 @@ public class Utils {
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
+    }
+
+    public static String convertMillisToTime(long timeStamp) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timeStamp);
+
+        int mYear = calendar.get(Calendar.YEAR);
+        int mMonth = calendar.get(Calendar.MONTH);
+        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+        int mHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int mMinute = calendar.get(Calendar.MINUTE);
+
+        return String.format("%02d:%02d:%02d %02d:%02d", mMonth, mDay, mYear, mHour, mMinute);
     }
 }

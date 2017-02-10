@@ -12,7 +12,7 @@ import java.util.List;
  * Created by rsons on 2/2/2017.
  */
 
-public class AppDataFormatter {
+public class AppFormatter {
 
     private static String[] titles = {
             "Facebook",
@@ -32,7 +32,6 @@ public class AppDataFormatter {
             "#FFFC00",
             "#00ACED",
             "#DC482F"};
-    private static String[] values = {"52m", "3h 6m", "1h 39m", "16m", "5h 41m"};
 
     public static List<App> createApps(List<UsageStats> stats) {
         List<App> data = new ArrayList<>();
@@ -43,47 +42,27 @@ public class AppDataFormatter {
                 item.setTitle(titles[0]);
                 item.setImageResId(icons[0]);
                 item.setBackgroundColor(backgroundColors[0]);
-                item.setValue(Utils.convertToHours(stats.get(i).getTotalTimeInForeground()));
-                data.add(item);
             } else if (stats.get(i).getPackageName().contains("instagram")) {
                 item.setTitle(titles[1]);
                 item.setImageResId(icons[1]);
                 item.setBackgroundColor(backgroundColors[1]);
-                item.setValue(Utils.convertToHours(stats.get(i).getTotalTimeInForeground()));
-                data.add(item);
             } else if (stats.get(i).getPackageName().contains("snapchat")) {
                 item.setTitle(titles[2]);
                 item.setImageResId(icons[2]);
                 item.setBackgroundColor(backgroundColors[2]);
-                item.setValue(Utils.convertToHours(stats.get(i).getTotalTimeInForeground()));
-                data.add(item);
             } else if (stats.get(i).getPackageName().contains("twitter")) {
                 item.setTitle(titles[3]);
                 item.setImageResId(icons[3]);
                 item.setBackgroundColor(backgroundColors[3]);
-                item.setValue(Utils.convertToHours(stats.get(i).getTotalTimeInForeground()));
-                data.add(item);
             } else {
                 item.setTitle(titles[4]);
                 item.setImageResId(icons[4]);
                 item.setBackgroundColor(backgroundColors[4]);
-                item.setValue(Utils.convertToHours(stats.get(i).getTotalTimeInForeground()));
-                data.add(item);
             }
-        }
 
-        return data;
-    }
-
-    public static List<App> getListData() {
-        List<App> data = new ArrayList<>();
-
-        for(int i = 0; i < titles.length; i++) {
-            App item = new App();
-            item.setTitle(titles[i]);
-            item.setImageResId(icons[i]);
-            item.setBackgroundColor(backgroundColors[i]);
-            item.setValue(values[i]);
+            item.setValue(Utils.convertMillisToDuration(stats.get(i).getTotalTimeInForeground()));
+            item.setStartTime(stats.get(i).getFirstTimeStamp()+"");
+            item.setEndTime(stats.get(i).getLastTimeStamp()+"");
             data.add(item);
         }
 
