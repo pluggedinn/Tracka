@@ -1,5 +1,7 @@
 package com.example.rsons.tracka.adapter;
 
+import android.app.usage.UsageStats;
+
 import com.airbnb.epoxy.EpoxyAdapter;
 import com.example.rsons.tracka.model.App;
 import com.example.rsons.tracka.model.AppModel;
@@ -18,5 +20,9 @@ public class AppAdapter extends EpoxyAdapter {
             addModel(new AppModel(app));
         }
 
+    }
+
+    public void clearApps() {
+        models.clear();
     }
 }

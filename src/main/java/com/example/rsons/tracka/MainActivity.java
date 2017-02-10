@@ -73,21 +73,14 @@ public class MainActivity extends AppCompatActivity {
             if (i.getPackageName().contains("katana")) {
                 long timeInForeground = i.getTotalTimeInForeground();
 
-                builder.append(i.getPackageName() + " " + convertToHours(timeInForeground) + "\n");
-//                Log.d("snippet", i.getPackageName() + " " + convertToHours(timeInForeground));
+                builder.append(i.getPackageName() + " " + Utils.convertToHours(timeInForeground) + "\n");
+//                Log.d("snippet", i.getPackageName() + " " + Utils.convertToHours(timeInForeground));
             }
         }
 
         text1.setText(builder.toString());
     }
 
-    private String convertToHours(long millis) {
-        String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-                TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
-
-        return hms;
-    }
 
     public void startOtherActivity(View v) {
         Intent intent = new Intent(this, DatePickerActivity.class);

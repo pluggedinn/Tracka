@@ -44,4 +44,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile 'com.airbnb.android:epoxy:1.5.0'
     annotationProcessor 'com.airbnb.android:epoxy-processor:1.5.0'
+    compile 'com.squareup:android-times-square:1.6.5@aar'
 }

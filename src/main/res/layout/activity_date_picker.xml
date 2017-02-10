@@ -16,7 +16,7 @@
         android:fontFamily="sans-serif-medium"
         android:onClick="showCalendar"/>
 
-    <CalendarView
+    <com.squareup.timessquare.CalendarPickerView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:visibility="visible" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/SAppList"
+        android:id="@+id/AppList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/calendarView">
