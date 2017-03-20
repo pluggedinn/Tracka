@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#3B5998">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        android:layout_marginLeft="51dp"
+        android:textColor="#ffffff"
+        android:textSize="24dp"
+        android:text="Facebook"
+        tools:ignore="MissingPrefix"
+        />
+
+    <View
+        android:id="@+id/timeline"
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="44dp"
+        android:background="@color/md_green_500"
+        android:layout_marginLeft="51dp"
+        android:layout_marginRight="51dp"/>
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:layout_marginLeft="76dp"
+        android:textColor="#ffffff"
+        android:alpha="0.75"
+        android:layout_below="@id/timeline"
+        android:text="You could have..."/>
+
+    <TextView
+        android:id="@+id/info_row1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="66dp"
+        android:layout_marginLeft="102dp"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/subtitle"
+        android:text="become 6% expert at bowling"/>
+
+    <TextView
+        android:id="@+id/info_row2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginLeft="102dp"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/info_row1"
+        android:text="could have read 'War and Peace' 42 times" />
+
+    <ImageView
+        android:layout_width="205dp"
+        android:layout_height="176dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:alpha="0.35"
+        android:src="@drawable/ic_facebook_icon"/>
+
+</RelativeLayout>

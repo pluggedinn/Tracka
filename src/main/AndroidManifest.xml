@@ -16,6 +16,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +25,8 @@
         </activity>
 
         <activity android:name=".DatePickerActivity"></activity>
+        <service android:name="com.example.rsons.tracka.SessionService"
+            android:enabled="true"></service>
     </application>
 
 </manifest>
