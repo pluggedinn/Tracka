@@ -4,12 +4,15 @@ import android.app.AppOpsManager;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -61,23 +64,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getStats() {
-        UsageStatsManager statsManager = (UsageStatsManager) this.getSystemService(this.USAGE_STATS_SERVICE);
-        List<UsageStats> listy =
-                statsManager.queryUsageStats(
-                        UsageStatsManager.INTERVAL_BEST,
-                        System.currentTimeMillis()- TimeUnit.DAYS.toMillis(3),
-                        System.currentTimeMillis());
 
+        File dbFile = this.getDatabasePath("TrackaDB");
+        SQLiteDatabase myDB = SQLiteDatabase.openDatabase(dbFile.getAbsolutePath(), null, MODE_PRIVATE);
+        Cursor result = myDB.rawQuery("Select * from Sessions",null);
         StringBuilder builder = new StringBuilder();
 
-        for (UsageStats i : listy) {
+        int rowsCount = result.getCount();
+        builder.append("Rows: " + rowsCount + "\n");
 
-            if (i.getPackageName().contains("katana")) {
-                long timeInForeground = i.getTotalTimeInForeground();
-
-                builder.append(i.getPackageName() + " " + Utils.convertMillisToDuration(timeInForeground) + "\n");
-//                Log.d("snippet", i.getPackageName() + " " + Utils.convertMillisToDuration(timeInForeground));
-            }
+        result.moveToFirst();
+        for(int i = 0; i < rowsCount; i++) {
+            builder.append(result.getLong(0) + " " + result.getLong(1) + " " + result.getLong(2) + "\n");
+            result.moveToNext();
         }
 
         text1.setText(builder.toString());
