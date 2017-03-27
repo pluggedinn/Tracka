@@ -50,7 +50,7 @@ public class SessionService extends IntentService {
 
         context = this;
 
-        Log.d("TRACKASERV", "serv started");
+        Log.d("TRACKASERV", "Service started");
 
         database = openOrCreateDatabase("TrackaDB",MODE_PRIVATE,null);
         database.execSQL("CREATE TABLE IF NOT EXISTS Sessions(package INTEGER, startTime LONG, endTime LONG);");
@@ -122,7 +122,7 @@ public class SessionService extends IntentService {
             }
         }, delay);
 
-        return super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     public void processFlags() {
@@ -131,34 +131,43 @@ public class SessionService extends IntentService {
             katanaFlag = false;
             String query = "INSERT INTO Sessions VALUES('0','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
+            Cursor result = database.rawQuery("Select * from Sessions",null);
+            Log.d("TRACKASERV", result.getCount() + "");
         }
         if (instagramFlag) {
             Log.d("TRACKASERV", "INSTAGRAM stopped");
             instagramFlag = false;
             String query = "INSERT INTO Sessions VALUES('1','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
+            Cursor result = database.rawQuery("Select * from Sessions",null);
+            Log.d("TRACKASERV", result.getCount() + "");
         }
         if (snapchatFlag) {
             Log.d("TRACKASERV", "SNAPCHAT stopped");
             snapchatFlag = false;
             String query = "INSERT INTO Sessions VALUES('2','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
+            Cursor result = database.rawQuery("Select * from Sessions",null);
+            Log.d("TRACKASERV", result.getCount() + "");
         }
         if (twitterFlag) {
             Log.d("TRACKASERV", "TWITTER stopped");
             twitterFlag = false;
             String query = "INSERT INTO Sessions VALUES('3','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
+            Cursor result = database.rawQuery("Select * from Sessions",null);
+            Log.d("TRACKASERV", result.getCount() + "");
         }
         if (youtubeFlag) {
             Log.d("TRACKASERV", "YOUTUBE stopped");
             youtubeFlag = false;
             String query = "INSERT INTO Sessions VALUES('4','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
+            Cursor result = database.rawQuery("Select * from Sessions",null);
+            Log.d("TRACKASERV", result.getCount() + "");
         }
 
-        Cursor result = database.rawQuery("Select * from Sessions",null);
-        Log.d("TRACKASERV", result.getCount() + "");
+
     }
 
     @Override
