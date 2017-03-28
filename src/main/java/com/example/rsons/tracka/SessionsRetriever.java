@@ -3,10 +3,16 @@ package com.example.rsons.tracka;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.example.rsons.tracka.model.Session;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by rsons on 2/9/2017.
@@ -14,67 +20,44 @@ import java.util.List;
 
 public class SessionsRetriever {
 
-    HashMap<String, String> appsCodes;
-    UsageStatsManager statsManager;
     Context context;
+    SQLiteDatabase myDB;
 
     public SessionsRetriever(Context c) {
         this.context = c;
 
-        statsManager = (UsageStatsManager) c.getSystemService(c.USAGE_STATS_SERVICE);
-
-        appsCodes = new HashMap<String, String>();
-        appsCodes.put("fb", "com.facebook.katana");
-        appsCodes.put("sc", "com.snapchat.android");
-        appsCodes.put("yt", "com.google.android.youtube");
-        appsCodes.put("ig", "com.instagram.android");
-        appsCodes.put("tw", "com.twitter.android");
+        // Initiliazing LOCAL database
+        File dbFile = c.getDatabasePath("TrackaDB");
+        myDB = SQLiteDatabase.openDatabase(dbFile.getAbsolutePath(), null, MODE_PRIVATE);
 
     }
 
-    /**
-     * Returns a list of sessions in the date period for that App in the form of UsageStats.
-     *
-     * returns List<UsageStats>
-     * @param startDate
-     * @param endDate
-     * @param appCode
-     * @return
-     */
-    public List<UsageStats> getSessionsApp(long startDate, long endDate, String appCode) {
+    public List<Session> getSessionsApp(long startDate, long endDate, int appCode) {
+        List<Session> sessionList = new ArrayList<Session>();
 
-        List<UsageStats> allSessions = statsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, startDate, endDate);
-        List<UsageStats> appSessions = new ArrayList<>();
-
-        for (UsageStats i : allSessions) {
-            if (i.getPackageName().contains(appsCodes.get(appCode))) {
-                appSessions.add(i);
-            }
+        Cursor result = myDB.rawQuery("SELECT * FROM Sessions WHERE package="+appCode+" AND startTime>"+startDate+" AND endTime<"+endDate+"",null);
+        int rowsCount = result.getCount();
+        result.moveToFirst();
+        for(int i = 0; i < rowsCount; i++) {
+            sessionList.add(new Session(result.getInt(0), result.getLong(1), result.getLong(2)));
         }
 
-        return appSessions;
+        return sessionList;
     }
 
-    /**
-     * Returns a list of sessions in the date period for all the Apps installed in form of UsageStats
-     *
-     * return List<UsageStats></UsageStats>
-     * @param startDate
-     * @param endDate
-     * @return
-     */
-    public List<UsageStats> getSessionsAllApps(long startDate, long endDate) {
 
-        List<UsageStats> allSessions = statsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startDate, endDate);
-        List<UsageStats> appSessions = new ArrayList<>();
+    public List<Session> getSessionsAllApps(long startDate, long endDate) {
+        List<Session> sessionList = new ArrayList<Session>();
 
-        for (UsageStats i : allSessions) {
-            if (appsCodes.containsValue(i.getPackageName()) && Utils.isPackageInstalled(i.getPackageName(), context.getPackageManager())) {
-                appSessions.add(i);
-            }
+        Cursor result = myDB.rawQuery("SELECT * FROM Sessions WHERE startTime>"+startDate+" AND endTime<"+endDate+"",null);
+        int rowsCount = result.getCount();
+        result.moveToFirst();
+        for(int i = 0; i < rowsCount; i++) {
+            sessionList.add(new Session(result.getInt(0), result.getLong(1), result.getLong(2)));
+            result.moveToNext();
         }
 
-        return appSessions;
+        return sessionList;
     }
 
 

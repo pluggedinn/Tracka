@@ -13,6 +13,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.rsons.tracka.adapter.AppAdapter;
 import com.example.rsons.tracka.model.AppFormatter;
+import com.example.rsons.tracka.model.Session;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class DatePickerActivity extends AppCompatActivity {
                     Calendar dayAfter = Calendar.getInstance();
                     dayAfter.setTime(date);
                     dayAfter.add(Calendar.DATE, 1);
-                    List<UsageStats> data = dataRetriever.getSessionsAllApps(date.getTime(), dayAfter.getTimeInMillis());
+                    List<Session> data = dataRetriever.getSessionsAllApps(date.getTime(), dayAfter.getTimeInMillis());
                     eAdapter.addApps(AppFormatter.createApps(data));
 
                     Log.d("DATA", data.size() + data.toString());
@@ -89,7 +90,7 @@ public class DatePickerActivity extends AppCompatActivity {
                     Calendar lastDay = Calendar.getInstance();
                     lastDay.setTime(selectedDates.get(selectedDates.size() - 1));
                     lastDay.add(Calendar.DATE, 1);
-                    List<UsageStats> data = dataRetriever.getSessionsAllApps(selectedDates.get(0).getTime(), lastDay.getTimeInMillis());
+                    List<Session> data = dataRetriever.getSessionsAllApps(selectedDates.get(0).getTime(), lastDay.getTimeInMillis());
                     eAdapter.addApps(AppFormatter.createApps(data));
                     showCalendar(null);
 

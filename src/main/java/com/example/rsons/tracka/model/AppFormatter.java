@@ -33,24 +33,24 @@ public class AppFormatter {
             "#00ACED",
             "#DC482F"};
 
-    public static List<App> createApps(List<UsageStats> stats) {
+    public static List<App> createApps(List<Session> sessionList) {
         List<App> data = new ArrayList<>();
 
-        for(int i = 0; i < stats.size(); i++) {
+        for(int i = 0; i < sessionList.size(); i++) {
             App item = new App();
-            if (stats.get(i).getPackageName().contains("katana")) {
+            if (sessionList.get(i).appCode == 0) {
                 item.setTitle(titles[0]);
                 item.setImageResId(icons[0]);
                 item.setBackgroundColor(backgroundColors[0]);
-            } else if (stats.get(i).getPackageName().contains("instagram")) {
+            } else if (sessionList.get(i).appCode == 1) {
                 item.setTitle(titles[1]);
                 item.setImageResId(icons[1]);
                 item.setBackgroundColor(backgroundColors[1]);
-            } else if (stats.get(i).getPackageName().contains("snapchat")) {
+            } else if (sessionList.get(i).appCode == 2) {
                 item.setTitle(titles[2]);
                 item.setImageResId(icons[2]);
                 item.setBackgroundColor(backgroundColors[2]);
-            } else if (stats.get(i).getPackageName().contains("twitter")) {
+            } else if (sessionList.get(i).appCode == 3) {
                 item.setTitle(titles[3]);
                 item.setImageResId(icons[3]);
                 item.setBackgroundColor(backgroundColors[3]);
@@ -60,9 +60,9 @@ public class AppFormatter {
                 item.setBackgroundColor(backgroundColors[4]);
             }
 
-            item.setValue(Utils.convertMillisToDuration(stats.get(i).getTotalTimeInForeground()));
-            item.setStartTime(stats.get(i).getFirstTimeStamp()+"");
-            item.setEndTime(stats.get(i).getLastTimeStamp()+"");
+            item.setValue(sessionList.get(i).getDuration());
+            item.setStartTime(sessionList.get(i).startTime+"");
+            item.setEndTime(sessionList.get(i).endTime+"");
             data.add(item);
         }
 
