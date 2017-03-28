@@ -22,6 +22,8 @@ import java.util.List;
 
 public class DatePickerActivity extends AppCompatActivity {
 
+    //TODO use MPAndroidChart to create a daily review. It's triggered by a notification that starts at the end of the day (once you go home)
+
     CalendarPickerView calendar;
     RecyclerView recView;
 
@@ -29,6 +31,7 @@ public class DatePickerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_picker);
+
 
         recView = (RecyclerView) findViewById(R.id.AppList);
         StaggeredGridLayoutManager staggeredManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
@@ -38,51 +41,61 @@ public class DatePickerActivity extends AppCompatActivity {
         recView.setAdapter(eAdapter);
         // eAdapter.addApps(AppFormatter.getListData());
 
+        // creatin default dates for the Calendar picker
         Calendar lastYear = Calendar.getInstance();
-        lastYear.add(Calendar.YEAR, -1);
-
         Calendar today = Calendar.getInstance();
-        Calendar previousDay = Calendar.getInstance();
-        previousDay.add(Calendar.DATE, -4);
-
         Calendar yesterday = Calendar.getInstance();
+        Calendar previousDay = Calendar.getInstance();
+        lastYear.add(Calendar.YEAR, -1);
+        previousDay.add(Calendar.DATE, -2);
         yesterday.add(Calendar.DATE, -1);
 
+        // adding them to a list
         List<Date> defaultDates = new ArrayList<>();
         defaultDates.add(previousDay.getTime());
         defaultDates.add(yesterday.getTime());
 
-        final SessionsRetriever dataRetriever = new SessionsRetriever(this);
 
         calendar = (CalendarPickerView) findViewById(R.id.calendarView);
         calendar.init(lastYear.getTime(), today.getTime())
                 .inMode(CalendarPickerView.SelectionMode.RANGE)
                 .withSelectedDates(defaultDates);
 
+        // initializing sessionretriever
+        final SessionsRetriever dataRetriever = new SessionsRetriever(this);
+
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
+
+                // getting selected dates
                 List<Date> selectedDates = calendar.getSelectedDates();
 
+                // clearing adapter
                 eAdapter.clearApps();
 
                 if (selectedDates.size() == 1) {
-                    Calendar dayBefore = Calendar.getInstance();
-                    dayBefore.setTime(date);
-                    dayBefore.add(Calendar.DATE, -1);
-                    Log.d("START", dayBefore.getTime()+"");
-                    Log.d("END", date.toString());
-                    List<UsageStats> data = dataRetriever.getSessionsAllApps(dayBefore.getTimeInMillis(), date.getTime());
-                    Log.d("DATA", data.size() + data.toString());
+                    Calendar dayAfter = Calendar.getInstance();
+                    dayAfter.setTime(date);
+                    dayAfter.add(Calendar.DATE, 1);
+                    List<UsageStats> data = dataRetriever.getSessionsAllApps(date.getTime(), dayAfter.getTimeInMillis());
                     eAdapter.addApps(AppFormatter.createApps(data));
 
-                } else {
-                    Log.d("START", selectedDates.get(0).toString()+"");
-                    Log.d("END", selectedDates.get(selectedDates.size() - 1).toString());
-                    List<UsageStats> data = dataRetriever.getSessionsAllApps(selectedDates.get(0).getTime(), selectedDates.get(selectedDates.size() - 1).getTime());
                     Log.d("DATA", data.size() + data.toString());
+                    Log.d("START", date.toString());
+                    Log.d("END", dayAfter.getTime()+"");
+                } else {
+
+                    Calendar lastDay = Calendar.getInstance();
+                    lastDay.setTime(selectedDates.get(selectedDates.size() - 1));
+                    lastDay.add(Calendar.DATE, 1);
+                    List<UsageStats> data = dataRetriever.getSessionsAllApps(selectedDates.get(0).getTime(), lastDay.getTimeInMillis());
                     eAdapter.addApps(AppFormatter.createApps(data));
                     showCalendar(null);
+
+                    Log.d("START", selectedDates.get(0).toString()+"");
+                    Log.d("END", lastDay.getTime()+"");
+                    Log.d("DATA", data.size() + data.toString());
                 }
             }
 
