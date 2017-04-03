@@ -32,6 +32,7 @@ public class SessionsRetriever {
 
     }
 
+    // TODO: fix the bug that when there's a sessions that goes between one day and the other day, it gets catched
     public List<Session> getSessionsApp(long startDate, long endDate, int appCode) {
         List<Session> sessionList = new ArrayList<Session>();
 

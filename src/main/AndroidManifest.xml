@@ -7,7 +7,7 @@
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -18,24 +18,26 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DatePickerActivity" />
 
-        <activity android:name=".DatePickerActivity"/>
-
-        <receiver android:name=".StartUpBootReceiver">
+        <receiver android:name=".MyReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.SCREEN_ON" />
             </intent-filter>
         </receiver>
+
         <service
-            android:name="com.example.rsons.tracka.SessionService"
-            android:enabled="true"/>
+            android:name=".SessionService"
+            android:enabled="true" />
+
+        <activity android:name=".AppActivity"></activity>
     </application>
 
 </manifest>

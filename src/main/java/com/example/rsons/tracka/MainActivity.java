@@ -71,11 +71,11 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder builder = new StringBuilder();
 
         int rowsCount = result.getCount();
-        builder.append("Rows: " + rowsCount + "\n");
+        builder.append("sessions: " + rowsCount + "\n");
 
         result.moveToFirst();
         for(int i = 0; i < rowsCount; i++) {
-            builder.append(result.getLong(0) + " " + result.getLong(1) + " " + result.getLong(2) + "\n");
+            builder.append(result.getLong(0) + " " + result.getLong(1) + " " + result.getLong(2) + " " + Utils.convertMillisToTime(result.getLong(1)) + "\n");
             result.moveToNext();
         }
 

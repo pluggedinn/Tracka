@@ -9,8 +9,8 @@ import com.example.rsons.tracka.Utils;
 public class Session {
 
     int appCode;
-    long startTime;
-    long endTime;
+    public long startTime;
+    public long endTime;
 
     public Session (int _appCode, long _startTime, long _endTime) {
         appCode = _appCode;
