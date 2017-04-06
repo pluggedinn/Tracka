@@ -14,6 +14,8 @@ import java.util.List;
 
 public class AppAdapter extends EpoxyAdapter {
 
+
+
     public void addApps(List<App> apps) {
 
         for (App app : apps) {

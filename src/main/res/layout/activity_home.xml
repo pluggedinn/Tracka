@@ -85,7 +85,8 @@
             android:background="@drawable/past_btn_selector"
             android:gravity="center"
             android:text="PAST"
-            android:textSize="26sp"/>
+            android:textSize="26sp"
+            android:onClick="clickPastActivity"/>
 
     </LinearLayout>
 

@@ -30,7 +30,7 @@ public class AppModel extends EpoxyModel<CardView> {
 
     @Override
     protected int getDefaultLayout() {
-        return R.layout.cell_list;
+        return R.layout.cell_app;
     }
 
     @Override
