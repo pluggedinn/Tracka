@@ -11,29 +11,38 @@
     tools:context="com.example.rsons.tracka.MainActivity">
 
     <Button
-        android:text="SHOW CALENDAR ACTIVITY"
-        android:id="@+id/otherActivity"
+        android:id="@+id/pastActivityBtn"
+        android:text="show past activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="startOtherActivity"
+        android:onClick="clickPastActivity"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:text="SHOW SESSIONS IN DATABASE"
+        android:id="@+id/homeActivityBtn"
+        android:text="show home activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pastActivityBtn"
+        android:onClick="clickHomeActivity"/>
+
+    <Button
+        android:id="@+id/sessionBtn"
+        android:text="show sessions in database"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:onClick="checkProcesses"
-        android:layout_below="@+id/otherActivity"
+        android:onClick="clickShowSessions"
+        android:layout_below="@+id/homeActivityBtn"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:overScrollMode="never"
-        android:layout_below="@id/button2">
+        android:layout_below="@id/sessionBtn">
         <TextView
             android:text="sample"
             android:layout_width="wrap_content"

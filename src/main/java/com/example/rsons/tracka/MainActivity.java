@@ -1,8 +1,6 @@
 package com.example.rsons.tracka;
 
 import android.app.AppOpsManager;
-import android.app.usage.UsageStats;
-import android.app.usage.UsageStatsManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,9 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.rsons.tracka.service.SessionService;
+
 import java.io.File;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,45 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        text1 = (TextView) findViewById(R.id.text);
+
+        // Starting service that tracks all the apps
         Intent intent = new Intent(this, SessionService.class);
         startService(intent);
-        text1 = (TextView) findViewById(R.id.text);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
-            case 2:
-                if (hasPermission()){
-                }else{
-                    requestPermission();
-                }
-                break;
-        }
-    }
-
-    public void checkProcesses(View v) {
-        if (!hasPermission()) {
-            requestPermission();
-        } else {
-            getStats();
-        }
-
-    }
-
-    private void requestPermission() {
-        startActivityForResult(new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS), 2);
-    }
-
-    private boolean hasPermission() {
-        AppOpsManager appOps = (AppOpsManager)
-                getSystemService(this.APP_OPS_SERVICE);
-        int mode = appOps.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
-                android.os.Process.myUid(), getPackageName());
-        return mode == AppOpsManager.MODE_ALLOWED;
-    }
-
-    private void getStats() {
+    public void clickShowSessions(View v) {
 
         File dbFile = this.getDatabasePath("TrackaDB");
         SQLiteDatabase myDB = SQLiteDatabase.openDatabase(dbFile.getAbsolutePath(), null, MODE_PRIVATE);
@@ -83,8 +50,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void startOtherActivity(View v) {
-        Intent intent = new Intent(this, DatePickerActivity.class);
+    public void clickPastActivity(View v) {
+        Intent intent = new Intent(this, PastActivity.class);
+        startActivity(intent);
+    }
+
+    public void clickHomeActivity(View v) {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 }

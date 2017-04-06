@@ -23,13 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DatePickerActivity" />
+        <activity android:name=".PastActivity" />
 
         <activity
-            android:name=".AppActivity">
+            android:name=".HomeActivity">
         </activity>
 
-        <receiver android:name=".MyReceiver">
+        <receiver android:name=".service.MyReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.SCREEN_ON" />
@@ -37,7 +37,7 @@
         </receiver>
 
         <service
-            android:name=".SessionService"
+            android:name=".service.SessionService"
             android:enabled="true" />
     </application>
 

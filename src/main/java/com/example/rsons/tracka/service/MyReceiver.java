@@ -1,4 +1,4 @@
-package com.example.rsons.tracka;
+package com.example.rsons.tracka.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

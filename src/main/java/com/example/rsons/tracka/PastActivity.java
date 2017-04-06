@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class DatePickerActivity extends AppCompatActivity {
+public class PastActivity extends AppCompatActivity {
 
     //TODO use MPAndroidChart to create a daily review. It's triggered by a notification that starts at the end of the day (once you go home)
 
