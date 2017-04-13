@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Tracka</string>
+
+    <string-array name="languages">
+        <item>Spanish</item>
+        <item>Russian</item>
+        <item>Italian</item>
+        <item>French</item>
+        <item>Greek</item>
+        <item>Portughese</item>
+    </string-array>
+
+    <string-array name="mountains">
+        <item>Mount Everest|40</item>
+        <item>Mount K2|63</item>
+        <item>Mount Makalu|56</item>
+    </string-array>
+
+    <string-array name="books">
+        <item>A Tale of Two Cities|135000</item>
+        <item>And Then There Were None|95000</item>
+        <item>She|121000</item>
+        <item>The Da Vinci Code|170000</item>
+        <item>The Catcher in the Rye|73000</item>
+        <item>The Return of the King|134000</item>
+        <item>The Hobbit|95000</item>
+        <item>The Lion, the Witch, and the Wardrobe|36000</item>
+    </string-array>
+
+    <string-array name="factsImagePath">
+        <item>R.drawable.language</item>
+        <item>R.drawable.walk</item>
+        <item>R.drawable.book</item>
+        <item>R.drawable.money</item>
+    </string-array>
 </resources>
