@@ -6,6 +6,7 @@ import com.example.rsons.tracka.model.AppModel;
 import com.example.rsons.tracka.model.PastHeaderModel;
 import com.example.rsons.tracka.model.ToolbarModel;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,10 +28,10 @@ public class PastAdapter extends EpoxyAdapter {
         notifyModelsChanged();
     }
 
-    public void addApps(List<App> apps) {
+    public void addApps(HashMap<Integer, App> apps) {
 
-        for (App app : apps) {
-            addModel(new AppModel(app));
+        for (Integer i : apps.keySet()) {
+            addModel(new AppModel(apps.get(i)));
         }
         notifyModelsChanged();
     }

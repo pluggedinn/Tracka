@@ -6,9 +6,12 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by rsons on 4/8/2017.
+ * Usage:
+ *  FactsRetriever rt = new FactsRetriever(context);
+ *  rt.generateNewFact(32215);
+ *  rt.getFactDrawableString();
+ *  rt.getFactString();
  */
-
 public class FactsRetriever {
 
     int factId;
@@ -27,7 +30,6 @@ public class FactsRetriever {
     String factString;
     Context context;
 
-    // TODO: download all the drawables and order them according to the list above
     public FactsRetriever(Context c) {
         this.context = c;
     }

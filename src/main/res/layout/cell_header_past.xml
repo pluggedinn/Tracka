@@ -8,10 +8,12 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="52dp"
         android:text="Tracka"
-        android:textSize="46sp"/>
+        android:textSize="46sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/subtitle"

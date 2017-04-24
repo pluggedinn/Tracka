@@ -1,11 +1,14 @@
 package com.example.rsons.tracka.model;
 
 import android.app.usage.UsageStats;
+import android.content.Intent;
 
+import com.example.rsons.tracka.FactsRetriever;
 import com.example.rsons.tracka.R;
 import com.example.rsons.tracka.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,39 +36,133 @@ public class AppFormatter {
             "#00ACED",
             "#DC482F"};
 
-    public static List<App> createApps(List<Session> sessionList) {
-        List<App> data = new ArrayList<>();
+    public static HashMap<Integer, App> createApps(List<Session> sessions) {
 
-        for(int i = 0; i < sessionList.size(); i++) {
-            App item = new App();
-            if (sessionList.get(i).appCode == 0) {
-                item.setTitle(titles[0]);
-                item.setImageResId(icons[0]);
-                item.setBackgroundColor(backgroundColors[0]);
-            } else if (sessionList.get(i).appCode == 1) {
-                item.setTitle(titles[1]);
-                item.setImageResId(icons[1]);
-                item.setBackgroundColor(backgroundColors[1]);
-            } else if (sessionList.get(i).appCode == 2) {
-                item.setTitle(titles[2]);
-                item.setImageResId(icons[2]);
-                item.setBackgroundColor(backgroundColors[2]);
-            } else if (sessionList.get(i).appCode == 3) {
-                item.setTitle(titles[3]);
-                item.setImageResId(icons[3]);
-                item.setBackgroundColor(backgroundColors[3]);
+        HashMap<Integer, App> map = new HashMap<Integer, App>();
+
+        for(int i = 0; i < sessions.size(); i++) {
+
+            if (sessions.get(i).appCode == 0) {
+
+                if (map.get(0) != null) {
+                    App app = map.get(0);
+                    app.accesses++;
+                    app.hours += sessions.get(i).endTime - sessions.get(i).startTime;
+                    app.sessions.add(sessions.get(i));
+                    map.put(0, app);
+
+                } else {
+                    App newApp = new App();
+                    newApp.name = titles[0];
+                    newApp.accesses = 1;
+                    newApp.backgroundColor = backgroundColors[0];
+                    newApp.backgroundIcon = icons[0];
+                    newApp.textColor = "#ffffff";
+                    newApp.hours = sessions.get(i).endTime - sessions.get(i).startTime;
+                    newApp.sessions = new ArrayList<Session>();
+                    newApp.sessions.add(sessions.get(i));
+                    map.put(0, newApp);
+                }
+
+            } else if (sessions.get(i).appCode == 1) {
+
+                if (map.get(1) != null) {
+                    App app = map.get(1);
+                    app.accesses++;
+                    app.hours += sessions.get(i).endTime - sessions.get(i).startTime;
+                    app.sessions.add(sessions.get(i));
+                    map.put(1, app);
+
+                } else {
+                    App newApp = new App();
+                    newApp.name = titles[1];
+                    newApp.accesses = 1;
+                    newApp.backgroundColor = backgroundColors[1];
+                    newApp.backgroundIcon = icons[1];
+                    newApp.textColor = "#ffffff";
+                    newApp.hours = sessions.get(i).endTime - sessions.get(i).startTime;
+                    newApp.sessions = new ArrayList<Session>();
+                    newApp.sessions.add(sessions.get(i));
+                    map.put(1, newApp);
+                }
+
+            } else if (sessions.get(i).appCode == 2) {
+
+                if (map.get(2) != null) {
+                    App app = map.get(2);
+                    app.accesses++;
+                    app.hours += sessions.get(i).endTime - sessions.get(i).startTime;
+                    app.sessions.add(sessions.get(i));
+                    map.put(2, app);
+
+
+                } else {
+                    App newApp = new App();
+                    newApp.name = titles[2];
+                    newApp.accesses = 1;
+                    newApp.backgroundColor = backgroundColors[2];
+                    newApp.backgroundIcon = icons[2];
+                    newApp.textColor = "#000000";
+                    newApp.hours = sessions.get(i).endTime - sessions.get(i).startTime;
+                    newApp.sessions = new ArrayList<Session>();
+                    newApp.sessions.add(sessions.get(i));
+                    map.put(2, newApp);
+                }
+
+            } else if (sessions.get(i).appCode == 3) {
+
+                if (map.get(3) != null) {
+                    App app = map.get(3);
+                    app.accesses++;
+                    app.hours += sessions.get(i).endTime - sessions.get(i).startTime;
+                    app.sessions.add(sessions.get(i));
+                    map.put(3, app);
+
+                } else {
+                    App newApp = new App();
+                    newApp.name = titles[3];
+                    newApp.accesses = 1;
+                    newApp.backgroundColor = backgroundColors[3];
+                    newApp.backgroundIcon = icons[3];
+                    newApp.textColor = "#000000";
+                    newApp.hours = sessions.get(i).endTime - sessions.get(i).startTime;
+                    newApp.sessions = new ArrayList<Session>();
+                    newApp.sessions.add(sessions.get(i));
+                    map.put(3, newApp);
+                }
+
             } else {
-                item.setTitle(titles[4]);
-                item.setImageResId(icons[4]);
-                item.setBackgroundColor(backgroundColors[4]);
+
+                if (map.get(4) != null) {
+                    App app = map.get(4);
+                    app.accesses++;
+                    app.hours += sessions.get(i).endTime - sessions.get(i).startTime;
+                    app.sessions.add(sessions.get(i));
+                    map.put(4, app);
+
+                } else {
+                    App newApp = new App();
+                    newApp.name = titles[4];
+                    newApp.accesses = 1;
+                    newApp.backgroundColor = backgroundColors[4];
+                    newApp.backgroundIcon = icons[4];
+                    newApp.textColor = "#ffffff";
+                    newApp.hours = sessions.get(i).endTime - sessions.get(i).startTime;
+                    newApp.sessions = new ArrayList<Session>();
+                    newApp.sessions.add(sessions.get(i));
+                    map.put(3, newApp);
+                }
             }
 
-            item.setValue(sessionList.get(i).getDuration());
-            item.setStartTime(sessionList.get(i).startTime+"");
-            item.setEndTime(sessionList.get(i).endTime+"");
-            data.add(item);
         }
 
-        return data;
+        for (Integer i : map.keySet()) {
+            App app = map.get(i);
+            app.hoursString = Utils.convertMillisToDuration(app.hours);
+            app.accessesString = "in " + app.accesses + " accesses";
+            map.put(i, app);
+        }
+
+        return map;
     }
 }

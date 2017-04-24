@@ -18,7 +18,7 @@ import java.util.Date;
  * Created by rsons on 3/20/2017.
  */
 
-// TODO: find another way to start the service. Sometimes when the memory runs out the system kills this process
+// TODO: starts the service with startForeground() with notification so that it never dies. Follow how Twilight does that
 public class SessionService extends IntentService {
 
     /*

@@ -1,58 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cell_card"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
-    android:layout_marginTop="4dp"
-    android:backgroundTint="#000000"
-    app:cardElevation="2dp">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/hours"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="24dp">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="36dp"
+        android:textSize="86sp"
+        />
 
-        <TextView
-            android:id="@+id/cell_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="title"
-            android:textColor="#ffffff"
-            android:textSize="24sp" />
+    <TextView
+        android:id="@+id/accesses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/hours"
+        android:textSize="20sp"
+        />
 
-        <TextView
-            android:id="@+id/cell_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cell_title"
-            android:layout_marginTop="8dp"
-            android:text="between what time"
-            android:textColor="#ffffff"
-            android:alpha="0.85"/>
+    <com.example.rsons.tracka.ui.UsageBarView
+        android:id="@+id/usageBar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/accesses"
+        />
 
-        <ImageView
-            android:id="@+id/cell_icon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_facebook_icon" />
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="52dp"
+        android:layout_below="@id/usageBar"
+        />
 
-        <TextView
-            android:id="@+id/cell_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cell_subtitle"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif"
-            android:text="value"
-            android:textColor="#ffffff"
-            android:alpha="0.85"
-            android:textSize="96dp" />
-    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/factsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/description">
 
-</android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/appIcon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="18dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:alpha="0.35"/>
+
+</RelativeLayout>

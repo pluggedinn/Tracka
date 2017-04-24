@@ -17,6 +17,8 @@ import butterknife.ButterKnife;
  * Created by rsons on 2/2/2017.
  */
 
+// TODO: 4/24/2017 fixare tutto qua. e aggiungere aggiungere il factsRetriever 
+
 public class AppModel extends EpoxyModel<CardView> {
     private final App app;
     @BindView(R.id.cell_title) TextView title;
@@ -30,7 +32,7 @@ public class AppModel extends EpoxyModel<CardView> {
 
     @Override
     protected int getDefaultLayout() {
-        return R.layout.cell_app;
+        return R.layout.old_cell_app;
     }
 
     @Override

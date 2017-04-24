@@ -30,7 +30,14 @@
     <string-array name="factsImagePath">
         <item>R.drawable.language</item>
         <item>R.drawable.walk</item>
+        <item>R.drawable.run</item>
         <item>R.drawable.book</item>
         <item>R.drawable.money</item>
+        <item>R.drawable.email</item>
+        <item>R.drawable.meal</item>
+        <item>R.drawable.omelete</item>
+        <item>R.drawable.love</item>
+        <item>R.drawable.mountain</item>
+        <item>R.drawable.pizza</item>
     </string-array>
 </resources>
