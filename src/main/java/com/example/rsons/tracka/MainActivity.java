@@ -14,6 +14,8 @@ import com.example.rsons.tracka.service.SessionService;
 
 import java.io.File;
 
+
+// TODO: 4/25/2017 setting up custom font  
 public class MainActivity extends AppCompatActivity {
 
     TextView text1;

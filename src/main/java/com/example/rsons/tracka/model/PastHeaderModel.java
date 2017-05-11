@@ -83,7 +83,7 @@ public class PastHeaderModel extends EpoxyModel<RelativeLayout> {
                     List<Session> data = dataRetriever.getSessionsAllApps(date.getTime(), dayAfter.getTimeInMillis());
 
                     // Adding apps to the adapter
-                    eAdapter.addApps(AppFormatter.createApps(data));
+                    eAdapter.addApps(AppFormatter.createApps(data), date, dayAfter.getTime());
 
                     Log.d("DATA", data.size() + data.toString());
                     Log.d("START", date.toString());
@@ -96,7 +96,7 @@ public class PastHeaderModel extends EpoxyModel<RelativeLayout> {
                     List<Session> data = dataRetriever.getSessionsAllApps(selectedDates.get(0).getTime(), lastDay.getTimeInMillis());
 
                     // Adding apps to the adapter
-                    eAdapter.addApps(AppFormatter.createApps(data));
+                    eAdapter.addApps(AppFormatter.createApps(data), selectedDates.get(0), lastDay.getTime());
 
                     Log.d("START", selectedDates.get(0).toString()+"");
                     Log.d("END", lastDay.getTime()+"");

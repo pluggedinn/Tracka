@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * Usage:
  *  FactsRetriever rt = new FactsRetriever(context);
  *  rt.generateNewFact(32215);
- *  rt.getFactDrawableString();
+ *  rt.getFactDrawable();
  *  rt.getFactString();
  */
 public class FactsRetriever {
@@ -71,7 +71,7 @@ public class FactsRetriever {
             String[] books = context.getResources().getStringArray(R.array.books);
             String randomBook = books[r.nextInt(books.length - 1)];
             String bookName = randomBook.split("|")[0];
-            double wordsInBook = Double.parseDouble(randomBook.split("|")[1]);
+            double wordsInBook = Double.parseDouble(randomBook.split("\\|")[1]);
             double timesBookRead = wordsRead / wordsInBook;
             factString = "read '" + bookName + "' " + timesBookRead + " times";
         }
@@ -107,10 +107,10 @@ public class FactsRetriever {
         // Climb mountains
         else if (factId == 9) {
             long days = TimeUnit.MILLISECONDS.toDays(time);
-            String[] mountains = context.getResources().getStringArray(R.array.books);
+            String[] mountains = context.getResources().getStringArray(R.array.mountains);
             String randomMountains = mountains[r.nextInt(mountains.length - 1)];
-            String mountainName = randomMountains.split("|")[0];
-            double daysToClimb = Double.parseDouble(randomMountains.split("|")[1]);
+            String mountainName = randomMountains.split("\\|")[0];
+            double daysToClimb = Double.parseDouble(randomMountains.split("\\|")[1]);
             double timesToClimb = days / daysToClimb;
             factString = "climbed " + mountainName + " " + timesToClimb + " times";
         }
@@ -121,8 +121,8 @@ public class FactsRetriever {
         }
     }
 
-    public String getFactDrawableString() {
-        String[] factsImageDrawables = context.getResources().getStringArray(R.array.languages);
+    public int getFactDrawable() {
+        int[] factsImageDrawables = context.getResources().getIntArray(R.array.factsImagePath);
         return factsImageDrawables[factId];
     }
 

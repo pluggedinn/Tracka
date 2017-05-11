@@ -16,7 +16,7 @@ import java.util.List;
  * Created by rsons on 4/1/2017.
  */
 
-// TODO: test it. Also put labels on top of the bar
+// TODO: to fix. The bar appears to be always red for everything
 public class UsageBarView extends View {
 
     private int w;

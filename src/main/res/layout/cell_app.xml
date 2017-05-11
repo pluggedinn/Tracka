@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp">
 
     <TextView
         android:id="@+id/hours"
@@ -11,6 +12,8 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="36dp"
         android:textSize="86sp"
+        android:textColor="@color/md_white_1000"
+        android:alpha="0.95"
         />
 
     <TextView
@@ -21,6 +24,8 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/hours"
         android:textSize="20sp"
+        android:textColor="@color/md_white_1000"
+        android:alpha="0.95"
         />
 
     <com.example.rsons.tracka.ui.UsageBarView
@@ -39,6 +44,8 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="52dp"
         android:layout_below="@id/usageBar"
+        android:textColor="@color/md_white_1000"
+        android:alpha="0.65"
         />
 
     <LinearLayout
@@ -48,7 +55,100 @@
         android:orientation="vertical"
         android:layout_marginStart="48dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="126dp"
         android:layout_below="@id/description">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/factImage1"
+                android:layout_width="86dp"
+                android:layout_height="86dp" />
+
+            <TextView
+                android:id="@+id/factText1"
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
+                android:layout_marginStart="18dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/md_white_1000"
+                android:alpha="0.95"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/factImage2"
+                android:layout_width="86dp"
+                android:layout_height="86dp" />
+
+            <TextView
+                android:id="@+id/factText2"
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
+                android:layout_marginStart="18dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/md_white_1000"
+                android:alpha="0.95"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/factImage3"
+                android:layout_width="86dp"
+                android:layout_height="86dp" />
+
+            <TextView
+                android:id="@+id/factText3"
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
+                android:layout_marginStart="18dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/md_white_1000"
+                android:alpha="0.95"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/factImage4"
+                android:layout_width="86dp"
+                android:layout_height="86dp" />
+
+            <TextView
+                android:id="@+id/factText4"
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
+                android:layout_marginStart="18dp"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/md_white_1000"
+                android:alpha="0.95"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
