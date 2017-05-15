@@ -26,7 +26,6 @@ import java.util.Date;
 
 // TODO: create color strings so that can be accessed from anywhere. here is hard coded
 // TODO: implement the onClick to stop the service 9 (check PendingIntent)
-// TODO: starts the service with startForeground() with notification so that it never dies. Follow how Twilight does that
 public class SessionService extends IntentService {
 
     /*

@@ -19,10 +19,5 @@ public class MyReceiver extends BroadcastReceiver {
             Intent i = new Intent(context, SessionService.class);
             context.startService(i);
         }
-        if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            Log.d("TRACKARECEIVER", "Screen on. Starting service");
-            Intent i = new Intent(context, SessionService.class);
-            context.startService(i);
-        }
     }
 }

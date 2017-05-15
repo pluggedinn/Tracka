@@ -67,7 +67,8 @@
             <ImageView
                 android:id="@+id/factImage1"
                 android:layout_width="86dp"
-                android:layout_height="86dp" />
+                android:layout_height="86dp"
+                android:tint="@color/md_white_1000"/>
 
             <TextView
                 android:id="@+id/factText1"
@@ -90,7 +91,8 @@
             <ImageView
                 android:id="@+id/factImage2"
                 android:layout_width="86dp"
-                android:layout_height="86dp" />
+                android:layout_height="86dp"
+                android:tint="@color/md_white_1000"/>
 
             <TextView
                 android:id="@+id/factText2"
@@ -113,7 +115,8 @@
             <ImageView
                 android:id="@+id/factImage3"
                 android:layout_width="86dp"
-                android:layout_height="86dp" />
+                android:layout_height="86dp"
+                android:tint="@color/md_white_1000"/>
 
             <TextView
                 android:id="@+id/factText3"
@@ -136,7 +139,8 @@
             <ImageView
                 android:id="@+id/factImage4"
                 android:layout_width="86dp"
-                android:layout_height="86dp" />
+                android:layout_height="86dp"
+                android:tint="@color/md_white_1000"/>
 
             <TextView
                 android:id="@+id/factText4"

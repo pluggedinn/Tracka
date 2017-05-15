@@ -1,9 +1,12 @@
 package com.example.rsons.tracka;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+// TODO: make that you can't get the same element when you generate. (try use an Collection shuffle)
 
 /**
  * Usage:
@@ -122,8 +125,8 @@ public class FactsRetriever {
     }
 
     public int getFactDrawable() {
-        int[] factsImageDrawables = context.getResources().getIntArray(R.array.factsImagePath);
-        return factsImageDrawables[factId];
+        TypedArray factsImageDrawables = context.getResources().obtainTypedArray(R.array.factsImagePath);
+        return factsImageDrawables.getResourceId(factId, -1);
     }
 
     public String getFactString() {
