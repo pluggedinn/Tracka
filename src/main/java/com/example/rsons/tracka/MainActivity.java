@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         // Starting service that tracks all the apps
         Intent intent = new Intent(this, SessionService.class);
         startService(intent);
+
+
     }
 
     public void clickShowSessions(View v) {

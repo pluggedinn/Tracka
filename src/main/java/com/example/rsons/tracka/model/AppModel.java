@@ -69,7 +69,7 @@ public class AppModel extends EpoxyModel<RelativeLayout> {
         description.setText("With this much time spent on "+ app.name +" you could have...");
         appIcon.setImageResource(app.backgroundIcon);
         view.setBackgroundColor(Color.parseColor(app.backgroundColor));
-        usageBar.init(app.sessions, start.getTime(), end.getTime(), Color.parseColor("#E64A19"), Color.parseColor("#E64A19"));
+        usageBar.init(app.sessions, start.getTime(), end.getTime(), Color.parseColor("#E64A19"), Color.parseColor("#388E3C"));
 
         // Generating facts
         FactsRetriever rt = new FactsRetriever(view.getContext());

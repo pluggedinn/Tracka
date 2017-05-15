@@ -1,15 +1,21 @@
 package com.example.rsons.tracka.service;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.rsons.tracka.R;
 import com.rvalerio.fgchecker.AppChecker;
 
 import java.util.Date;
@@ -18,6 +24,8 @@ import java.util.Date;
  * Created by rsons on 3/20/2017.
  */
 
+// TODO: create color strings so that can be accessed from anywhere. here is hard coded
+// TODO: implement the onClick to stop the service 9 (check PendingIntent)
 // TODO: starts the service with startForeground() with notification so that it never dies. Follow how Twilight does that
 public class SessionService extends IntentService {
 
@@ -58,6 +66,20 @@ public class SessionService extends IntentService {
 
         final Handler h = new Handler();
         final int delay = 1000; //milliseconds
+
+        Bitmap icon = BitmapFactory.decodeResource(getResources(),
+                R.mipmap.ic_minimal);
+
+        Notification notification = new NotificationCompat.Builder(this)
+                .setContentText("Running, tap to stop")
+                .setSmallIcon(R.mipmap.ic_minimal)
+                .setColor(Color.parseColor("#0B486B"))
+                .setPriority(Notification.PRIORITY_MIN)
+                .setShowWhen(false)
+                .setOngoing(true).build();
+
+        startForeground(1192,
+                notification);
 
 
         h.postDelayed(new Runnable(){

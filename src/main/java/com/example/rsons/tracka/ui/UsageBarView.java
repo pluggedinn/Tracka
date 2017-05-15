@@ -16,7 +16,6 @@ import java.util.List;
  * Created by rsons on 4/1/2017.
  */
 
-// TODO: to fix. The bar appears to be always red for everything
 public class UsageBarView extends View {
 
     private int w;
@@ -69,7 +68,7 @@ public class UsageBarView extends View {
 
             for (Session s : sessions) {
                 long startPixel = w * (s.startTime - startPeriod) / (endPeriod - startPeriod);
-                long endPixel = w * (s.endTime = startPeriod) / (endPeriod - startPeriod);
+                long endPixel = w * (s.endTime - startPeriod) / (endPeriod - startPeriod);
                 canvas.drawRect((float) startPixel, (float) 0, (float) endPixel, (float) h, seshPaint);
             }
         }
