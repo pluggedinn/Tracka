@@ -2,6 +2,7 @@ package com.example.rsons.tracka;
 
 import android.app.AppOpsManager;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.Settings;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.rsons.tracka.service.MyReceiver;
 import com.example.rsons.tracka.service.SessionService;
 
 import java.io.File;
@@ -26,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         text1 = (TextView) findViewById(R.id.text);
+
+        // Registering receiver that tracks if the screen is on
+        MyReceiver receiver = new MyReceiver();
+        IntentFilter lockFilter = new IntentFilter();
+        lockFilter.addAction(Intent.ACTION_SCREEN_ON);
+        lockFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        registerReceiver(receiver, lockFilter);
 
         // Starting service that tracks all the apps
         Intent intent = new Intent(this, SessionService.class);

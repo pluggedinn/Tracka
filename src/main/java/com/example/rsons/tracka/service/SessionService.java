@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
@@ -54,18 +55,24 @@ public class SessionService extends IntentService {
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+
+
+    }
+
+    @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
 
         context = this;
 
-        Log.d("TRACKASERV", "Service started");
+        Log.d("TrackaService", "Service started");
 
+        // Initializing the database
         database = openOrCreateDatabase("TrackaDB",MODE_PRIVATE,null);
         database.execSQL("CREATE TABLE IF NOT EXISTS Sessions(package INTEGER, startTime LONG, endTime LONG);");
 
-        final Handler h = new Handler();
-        final int delay = 1000; //milliseconds
-
+        // Starting the service in Foreground mode and turning on the notification
         Bitmap icon = BitmapFactory.decodeResource(getResources(),
                 R.mipmap.ic_minimal);
 
@@ -81,57 +88,63 @@ public class SessionService extends IntentService {
                 notification);
 
 
+        // Starting the loop that looks for apps opened and closed
+        final Handler h = new Handler();
+        final int delay = 1000; //milliseconds
+        final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+
         h.postDelayed(new Runnable(){
             public void run(){
                 appChecker = new AppChecker();
                 String packageName = appChecker.getForegroundApp(context);
+                boolean isScreenOn = pm.isInteractive();
 
-                if (packageName.contains("com.facebook.katana")) {
+                if (packageName.contains("com.facebook.katana") && isScreenOn) {
                     if (lastAppOpened != 0) {
                         processFlags();
                     }
                     if (!katanaFlag) {
-                        Log.d("TRACKASERV", "FACEBOOK started");
+                        Log.d("TrackaService", "FACEBOOK started");
                         katanaFlag = true;
                         lastAppOpened = 0;
                         currAppStartTime = new Date().getTime();
                     }
-                } else if (packageName.contains("com.instagram.android")) {
+                } else if (packageName.contains("com.instagram.android") && isScreenOn) {
                     if (lastAppOpened != 1) {
                         processFlags();
                     }
                     if (!instagramFlag) {
-                        Log.d("TRACKASERV", "INSTAGRAM started");
+                        Log.d("TrackaService", "INSTAGRAM started");
                         instagramFlag = true;
                         lastAppOpened = 1;
                         currAppStartTime = new Date().getTime();
                     }
-                } else if (packageName.contains("com.snapchat.android")) {
+                } else if (packageName.contains("com.snapchat.android") && isScreenOn) {
                     if (lastAppOpened != 2) {
                         processFlags();
                     }
                     if (!snapchatFlag) {
-                        Log.d("TRACKASERV", "SNAPCHAT started");
+                        Log.d("TrackaService", "SNAPCHAT started");
                         snapchatFlag = true;
                         lastAppOpened = 2;
                         currAppStartTime = new Date().getTime();
                     }
-                } else if (packageName.contains("com.twitter.android")) {
+                } else if (packageName.contains("com.twitter.android") && isScreenOn) {
                     if (lastAppOpened != 3) {
                         processFlags();
                     }
                     if (!twitterFlag) {
-                        Log.d("TRACKASERV", "TWITTER started");
+                        Log.d("TrackaService", "TWITTER started");
                         twitterFlag = true;
                         lastAppOpened = 3;
                         currAppStartTime = new Date().getTime();
                     }
-                } else if (packageName.contains("com.google.android.youtube")) {
+                } else if (packageName.contains("com.google.android.youtube") && isScreenOn) {
                     if (lastAppOpened != 4) {
                         processFlags();
                     }
                     if (!youtubeFlag) {
-                        Log.d("TRACKASERV", "YOUTUBE started");
+                        Log.d("TrackaService", "YOUTUBE started");
                         youtubeFlag = true;
                         lastAppOpened = 4;
                         currAppStartTime = new Date().getTime();
@@ -149,52 +162,60 @@ public class SessionService extends IntentService {
 
     public void processFlags() {
         if (katanaFlag) {
-            Log.d("TRACKASERV", "FACEBOOK stopped");
+            Log.d("TrackaService", "FACEBOOK stopped");
             katanaFlag = false;
             String query = "INSERT INTO Sessions VALUES('0','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
             Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TRACKASERV", result.getCount() + "");
+            Log.d("TrackaService", result.getCount() + " sessions total");
         }
         if (instagramFlag) {
-            Log.d("TRACKASERV", "INSTAGRAM stopped");
+            Log.d("TrackaService", "INSTAGRAM stopped");
             instagramFlag = false;
             String query = "INSERT INTO Sessions VALUES('1','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
             Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TRACKASERV", result.getCount() + "");
+            Log.d("TrackaService", result.getCount() + " sessions total");
         }
         if (snapchatFlag) {
-            Log.d("TRACKASERV", "SNAPCHAT stopped");
+            Log.d("TrackaService", "SNAPCHAT stopped");
             snapchatFlag = false;
             String query = "INSERT INTO Sessions VALUES('2','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
             Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TRACKASERV", result.getCount() + "");
+            Log.d("TrackaService", result.getCount() + " sessions total");
         }
         if (twitterFlag) {
-            Log.d("TRACKASERV", "TWITTER stopped");
+            Log.d("TrackaService", "TWITTER stopped");
             twitterFlag = false;
             String query = "INSERT INTO Sessions VALUES('3','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
             Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TRACKASERV", result.getCount() + "");
+            Log.d("TrackaService", result.getCount() + " sessions total");
         }
         if (youtubeFlag) {
-            Log.d("TRACKASERV", "YOUTUBE stopped");
+            Log.d("TrackaService", "YOUTUBE stopped");
             youtubeFlag = false;
             String query = "INSERT INTO Sessions VALUES('4','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
             Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TRACKASERV", result.getCount() + "");
+            Log.d("TrackaService", result.getCount() + " sessions total");
         }
 
 
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("TrackaService", "Service stopped");
+    }
+
+    @Override
     protected void onHandleIntent(@Nullable Intent intent) {
 
     }
+
+
 
 }
