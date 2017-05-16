@@ -2,6 +2,8 @@ package com.example.rsons.tracka.service;
 
 import android.app.IntentService;
 import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -48,6 +50,9 @@ public class SessionService extends IntentService {
     SQLiteDatabase database;
     Context context;
     AppChecker appChecker;
+    Handler handler;
+    Runnable runnable;
+    private String ACTION_STOP_SERVICE = "0";
 
 
     public SessionService() {
@@ -55,45 +60,48 @@ public class SessionService extends IntentService {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-
-
-    }
-
-    @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
+        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
+        // Checking if ACTION_STOP_SERVICE event is triggered
+        if (ACTION_STOP_SERVICE.equals(intent.getAction())) {
+            Log.d("TrackaService","called to cancel service");
+            mNotifyMgr.cancel(1192);
+            stopSelf();
+            return START_NOT_STICKY;
+        }
+
+        // ... continue with the execution of the Service
         context = this;
-
         Log.d("TrackaService", "Service started");
 
         // Initializing the database
         database = openOrCreateDatabase("TrackaDB",MODE_PRIVATE,null);
         database.execSQL("CREATE TABLE IF NOT EXISTS Sessions(package INTEGER, startTime LONG, endTime LONG);");
 
-        // Starting the service in Foreground mode and turning on the notification
-        Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                R.mipmap.ic_minimal);
+        // Setting the action when the user taps on the notification
+        Intent stopSelf = new Intent(this, SessionService.class);
+        stopSelf.setAction(this.ACTION_STOP_SERVICE);
+        PendingIntent pStopSelf = PendingIntent.getService(this, 0, stopSelf, PendingIntent.FLAG_CANCEL_CURRENT);
 
+        // Creating notification and starting service in Foreground
         Notification notification = new NotificationCompat.Builder(this)
                 .setContentText("Running, tap to stop")
                 .setSmallIcon(R.mipmap.ic_minimal)
                 .setColor(Color.parseColor("#0B486B"))
                 .setPriority(Notification.PRIORITY_MIN)
                 .setShowWhen(false)
+                .setContentIntent(pStopSelf)
                 .setOngoing(true).build();
 
-        startForeground(1192,
-                notification);
-
+        startForeground(1192, notification);
 
         // Starting the loop that looks for apps opened and closed
-        final Handler h = new Handler();
+        handler = new Handler();
         final int delay = 1000; //milliseconds
         final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
-        h.postDelayed(new Runnable(){
+        runnable = new Runnable(){
             public void run(){
                 appChecker = new AppChecker();
                 String packageName = appChecker.getForegroundApp(context);
@@ -153,61 +161,74 @@ public class SessionService extends IntentService {
                     processFlags();
                     lastAppOpened = -1;
                 }
-                h.postDelayed(this, delay);
+                handler.postDelayed(this, delay);
             }
-        }, delay);
+        };
+
+        handler.postDelayed(runnable, delay);
 
         return START_STICKY;
     }
 
     public void processFlags() {
+
         if (katanaFlag) {
             Log.d("TrackaService", "FACEBOOK stopped");
             katanaFlag = false;
             String query = "INSERT INTO Sessions VALUES('0','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
-            Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TrackaService", result.getCount() + " sessions total");
+
+            Cursor cursor = database.rawQuery("Select * from Sessions",null);
+            Log.d("TrackaService", cursor.getCount() + " sessions total");
+            cursor.close();
         }
         if (instagramFlag) {
             Log.d("TrackaService", "INSTAGRAM stopped");
             instagramFlag = false;
             String query = "INSERT INTO Sessions VALUES('1','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
-            Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TrackaService", result.getCount() + " sessions total");
+
+            Cursor cursor = database.rawQuery("Select * from Sessions",null);
+            Log.d("TrackaService", cursor.getCount() + " sessions total");
+            cursor.close();
         }
         if (snapchatFlag) {
             Log.d("TrackaService", "SNAPCHAT stopped");
             snapchatFlag = false;
             String query = "INSERT INTO Sessions VALUES('2','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
-            Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TrackaService", result.getCount() + " sessions total");
+
+            Cursor cursor = database.rawQuery("Select * from Sessions",null);
+            Log.d("TrackaService", cursor.getCount() + " sessions total");
+            cursor.close();
         }
         if (twitterFlag) {
             Log.d("TrackaService", "TWITTER stopped");
             twitterFlag = false;
             String query = "INSERT INTO Sessions VALUES('3','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
-            Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TrackaService", result.getCount() + " sessions total");
+
+            Cursor cursor = database.rawQuery("Select * from Sessions",null);
+            Log.d("TrackaService", cursor.getCount() + " sessions total");
+            cursor.close();
         }
         if (youtubeFlag) {
             Log.d("TrackaService", "YOUTUBE stopped");
             youtubeFlag = false;
             String query = "INSERT INTO Sessions VALUES('4','"+currAppStartTime+"','"+new Date().getTime()+"');";
             database.execSQL(query);
-            Cursor result = database.rawQuery("Select * from Sessions",null);
-            Log.d("TrackaService", result.getCount() + " sessions total");
+
+            Cursor cursor = database.rawQuery("Select * from Sessions",null);
+            Log.d("TrackaService", cursor.getCount() + " sessions total");
+            cursor.close();
         }
-
-
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        processFlags();
+        handler.removeCallbacks(runnable);
         Log.d("TrackaService", "Service stopped");
     }
 

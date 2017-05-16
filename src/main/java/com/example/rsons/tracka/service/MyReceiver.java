@@ -26,13 +26,14 @@ public class MyReceiver extends BroadcastReceiver {
             lockFilter.addAction(Intent.ACTION_SCREEN_OFF);
             context.getApplicationContext().registerReceiver(this, lockFilter);
 
-            // Starting SessionService
             context.startService(i);
-        } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+        }
+
+        // Detecting screen on
+        else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             Log.d("TrackaRecevier", "Screen on. Starting service");
             Intent i = new Intent(context, SessionService.class);
 
-            // Starting SessionService
             context.startService(i);
         }
     }

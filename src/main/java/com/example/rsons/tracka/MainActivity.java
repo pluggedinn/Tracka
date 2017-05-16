@@ -21,6 +21,7 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     TextView text1;
+    MyReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,9 @@ public class MainActivity extends AppCompatActivity {
         text1 = (TextView) findViewById(R.id.text);
 
         // Registering receiver that tracks if the screen is on
-        MyReceiver receiver = new MyReceiver();
+        receiver = new MyReceiver();
         IntentFilter lockFilter = new IntentFilter();
         lockFilter.addAction(Intent.ACTION_SCREEN_ON);
-        lockFilter.addAction(Intent.ACTION_SCREEN_OFF);
         registerReceiver(receiver, lockFilter);
 
         // Starting service that tracks all the apps
@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
 
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     public void clickShowSessions(View v) {
