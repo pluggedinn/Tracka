@@ -3,15 +3,16 @@ package com.example.rsons.tracka;
 import android.content.Context;
 import android.content.res.TypedArray;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-// TODO: make that you can't get the same element when you generate. (try use an Collection shuffle)
 
 /**
  * Usage:
  *  FactsRetriever rt = new FactsRetriever(context);
- *  rt.generateNewFact(32215);
+ *  rt.generateNewFact(32215); // where 32215 is the period of time
  *  rt.getFactDrawable();
  *  rt.getFactString();
  */
@@ -32,14 +33,32 @@ public class FactsRetriever {
 
     String factString;
     Context context;
+    ArrayList<Integer> factNumbers;
+    Random r;
 
     public FactsRetriever(Context c) {
         this.context = c;
+        this.r = new Random();
+
+        // Generating a list of numbers from 0 to 10 (that is the total number of facts)
+        factNumbers = new ArrayList<Integer>();
+        for(int i = 0; i < 11; i++) {
+            factNumbers.add(i);
+        }
+
+        // Shuffling order of numbers
+        Collections.shuffle(factNumbers);
     }
 
     public void generateNewFact(long time){
-        Random r = new Random();
-        factId = r.nextInt(10);
+        // Checking if all the facts have been used
+        if (factNumbers.size() == 0) {
+            factId = 0;
+        }
+
+        // Getting first random fact
+        factId = factNumbers.get(0);
+        factNumbers.remove(0);
 
         // Language fact
         if (factId == 0) {

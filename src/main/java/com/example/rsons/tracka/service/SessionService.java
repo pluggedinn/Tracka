@@ -106,7 +106,7 @@ public class SessionService extends IntentService {
                 .setSmallIcon(R.mipmap.ic_minimal)
                 .setColor(Color.parseColor("#0B486B"))
                 .setPriority(Notification.PRIORITY_MIN)
-                .setShowWhen(false)
+                //.setShowWhen(false)
                 .setContentIntent(pStopSelf)
                 .setOngoing(true).build();
 
