@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -28,7 +29,6 @@ import java.util.Date;
  */
 
 // TODO: create color strings so that can be accessed from anywhere. here is hard coded
-// TODO: implement the onClick to stop the service 9 (check PendingIntent)
 public class SessionService extends IntentService {
 
     /*
@@ -52,11 +52,18 @@ public class SessionService extends IntentService {
     AppChecker appChecker;
     Handler handler;
     Runnable runnable;
+    MyReceiver receiver;
     private String ACTION_STOP_SERVICE = "0";
 
 
     public SessionService() {
         super("Sessions Recorder");
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.d("TrackaService", "Service created");
     }
 
     @Override
@@ -68,12 +75,21 @@ public class SessionService extends IntentService {
             Log.d("TrackaService","called to cancel service");
             mNotifyMgr.cancel(1192);
             stopSelf();
+            Log.d("TrackaService", "returning start_not_sticky");
             return START_NOT_STICKY;
         }
 
         // ... continue with the execution of the Service
         context = this;
         Log.d("TrackaService", "Service started");
+
+        // Registering SCREEN ON event to this receiver
+        Intent i = new Intent(context, SessionService.class);
+        receiver = new MyReceiver();
+        IntentFilter lockFilter = new IntentFilter();
+        lockFilter.addAction(Intent.ACTION_SCREEN_ON);
+        lockFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        context.getApplicationContext().registerReceiver(receiver, lockFilter);
 
         // Initializing the database
         database = openOrCreateDatabase("TrackaDB",MODE_PRIVATE,null);
@@ -161,12 +177,15 @@ public class SessionService extends IntentService {
                     processFlags();
                     lastAppOpened = -1;
                 }
-                handler.postDelayed(this, delay);
+
+                // Restarting this runnable at the delay
+                handler.postDelayed(runnable, delay);
             }
         };
 
-        handler.postDelayed(runnable, delay);
+        handler.post(runnable);
 
+        Log.d("TrackaService", "returning start_sticky");
         return START_STICKY;
     }
 
@@ -229,6 +248,7 @@ public class SessionService extends IntentService {
         super.onDestroy();
         processFlags();
         handler.removeCallbacks(runnable);
+        context.getApplicationContext().unregisterReceiver(receiver);
         Log.d("TrackaService", "Service stopped");
     }
 

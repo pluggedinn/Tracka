@@ -18,13 +18,7 @@ public class MyReceiver extends BroadcastReceiver {
         // Detecting the end of the boot
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             Log.d("TrackaRecevier", "Boot completed. Starting service");
-
-            // Registering SCREEN ON event to this receiver
             Intent i = new Intent(context, SessionService.class);
-            IntentFilter lockFilter = new IntentFilter();
-            lockFilter.addAction(Intent.ACTION_SCREEN_ON);
-            lockFilter.addAction(Intent.ACTION_SCREEN_OFF);
-            context.getApplicationContext().registerReceiver(this, lockFilter);
 
             context.startService(i);
         }
