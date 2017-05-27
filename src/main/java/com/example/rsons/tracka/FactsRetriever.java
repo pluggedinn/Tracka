@@ -62,7 +62,8 @@ public class FactsRetriever {
 
         // Language fact
         if (factId == 0) {
-            int percentageProficiency = (int) (time * 100 / 1100);
+            long hours = TimeUnit.MILLISECONDS.toHours(time);
+            int percentageProficiency = (int) ((hours * 100) / 1100);
             String[] languages = context.getResources().getStringArray(R.array.languages);
             String randomLanguage = languages[r.nextInt(languages.length - 1)];
             factString = "become " + percentageProficiency + "% proficient in " + randomLanguage;
@@ -92,15 +93,15 @@ public class FactsRetriever {
             long wordsRead = minutes * 200;
             String[] books = context.getResources().getStringArray(R.array.books);
             String randomBook = books[r.nextInt(books.length - 1)];
-            String bookName = randomBook.split("|")[0];
+            String bookName = randomBook.split("\\|")[0];
             double wordsInBook = Double.parseDouble(randomBook.split("\\|")[1]);
             double timesBookRead = wordsRead / wordsInBook;
-            factString = "read '" + bookName + "' " + timesBookRead + " times";
+            factString = "read '" + bookName + "' " + (int)timesBookRead + " times";
         }
         // Money earned minimum wage
         else if (factId == 4) {
             long hours = TimeUnit.MILLISECONDS.toHours(time);
-            factString = "earned $" + hours*10.25 + " in California or $" + hours*7.25 + " Utah minimum wage";
+            factString = "earned $" + hours*10.25 + " in California minimum wage";
         }
         // Email responded
         else if (factId == 5) {
@@ -112,7 +113,7 @@ public class FactsRetriever {
             long hours = TimeUnit.MILLISECONDS.toHours(time);
             // let's say it takes 3 hours to cook 21 meals
             double mealsPrepared = hours * 21 / 3;
-            factString = "prepared " + mealsPrepared + " full meals";
+            factString = "prepared " + (int)mealsPrepared + " full meals";
         }
         // Omeletes cooked
         else if (factId == 7) {
