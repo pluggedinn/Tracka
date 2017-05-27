@@ -3,36 +3,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="24dp">
+    android:paddingStart="48dp">
 
     <TextView
         android:id="@+id/hours"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
         android:layout_marginTop="36dp"
         android:textSize="86sp"
         android:textColor="@color/md_white_1000"
         android:alpha="0.95"
+        fontPath="fonts/AvenirNextLTPro-Demi.otf"
         />
 
     <TextView
         android:id="@+id/accesses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/hours"
         android:textSize="20sp"
         android:textColor="@color/md_white_1000"
         android:alpha="0.95"
+        fontPath="fonts/AvenirNextLTPro-Regular.otf"
         />
 
     <com.example.rsons.tracka.ui.UsageBarView
         android:id="@+id/usageBar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="48dp"
+        android:layout_height="14dp"
         android:layout_marginTop="20dp"
         android:layout_below="@id/accesses"
         />
@@ -41,11 +40,15 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
         android:layout_marginTop="52dp"
         android:layout_below="@id/usageBar"
         android:textColor="@color/md_white_1000"
+        android:textSize="16sp"
+        android:paddingRight="32dp"
+        android:paddingEnd="32dp"
+        android:lineSpacingExtra="8sp"
         android:alpha="0.65"
+        fontPath="fonts/AvenirNextLTPro-It.otf"
         />
 
     <LinearLayout
@@ -53,32 +56,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="126dp"
+        android:paddingRight="32dp"
+        android:paddingEnd="32dp"
         android:layout_below="@id/description">
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp">
 
             <ImageView
                 android:id="@+id/factImage1"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:tint="@color/md_white_1000"/>
 
             <TextView
                 android:id="@+id/factText1"
                 android:layout_width="match_parent"
-                android:layout_height="86dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="18dp"
                 android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/md_white_1000"
-                android:alpha="0.95"/>
+                android:alpha="0.95"
+                fontPath="fonts/AvenirNextLTPro-Regular.otf"/>
 
         </LinearLayout>
 
@@ -86,23 +92,25 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp">
 
             <ImageView
                 android:id="@+id/factImage2"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:tint="@color/md_white_1000"/>
 
             <TextView
                 android:id="@+id/factText2"
                 android:layout_width="match_parent"
-                android:layout_height="86dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="18dp"
                 android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/md_white_1000"
-                android:alpha="0.95"/>
+                android:alpha="0.95"
+                fontPath="fonts/AvenirNextLTPro-Regular.otf"/>
 
         </LinearLayout>
 
@@ -110,23 +118,25 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp">
 
             <ImageView
                 android:id="@+id/factImage3"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:tint="@color/md_white_1000"/>
 
             <TextView
                 android:id="@+id/factText3"
                 android:layout_width="match_parent"
-                android:layout_height="86dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="18dp"
                 android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/md_white_1000"
-                android:alpha="0.95"/>
+                android:alpha="0.95"
+                fontPath="fonts/AvenirNextLTPro-Regular.otf"/>
 
         </LinearLayout>
 
@@ -134,23 +144,25 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp">
 
             <ImageView
                 android:id="@+id/factImage4"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:tint="@color/md_white_1000"/>
 
             <TextView
                 android:id="@+id/factText4"
                 android:layout_width="match_parent"
-                android:layout_height="86dp"
+                android:layout_height="80dp"
                 android:layout_marginStart="18dp"
                 android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/md_white_1000"
-                android:alpha="0.95"/>
+                android:alpha="0.95"
+                fontPath="fonts/AvenirNextLTPro-Regular.otf"/>
 
         </LinearLayout>
 

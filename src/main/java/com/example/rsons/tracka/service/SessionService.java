@@ -63,6 +63,13 @@ public class SessionService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // Registering receiver that tracks if the screen is on
+        receiver = new MyReceiver();
+        IntentFilter lockFilter = new IntentFilter();
+        lockFilter.addAction(Intent.ACTION_SCREEN_ON);
+        registerReceiver(receiver, lockFilter);
+
         Log.d("TrackaService", "Service created");
     }
 
@@ -82,14 +89,6 @@ public class SessionService extends IntentService {
         // ... continue with the execution of the Service
         context = this;
         Log.d("TrackaService", "Service started");
-
-        // Registering SCREEN ON event to this receiver
-        Intent i = new Intent(context, SessionService.class);
-        receiver = new MyReceiver();
-        IntentFilter lockFilter = new IntentFilter();
-        lockFilter.addAction(Intent.ACTION_SCREEN_ON);
-        lockFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        context.getApplicationContext().registerReceiver(receiver, lockFilter);
 
         // Initializing the database
         database = openOrCreateDatabase("TrackaDB",MODE_PRIVATE,null);
@@ -248,8 +247,8 @@ public class SessionService extends IntentService {
         super.onDestroy();
         processFlags();
         handler.removeCallbacks(runnable);
-        context.getApplicationContext().unregisterReceiver(receiver);
-        Log.d("TrackaService", "Service stopped");
+        unregisterReceiver(receiver);
+        Log.d("TrackaService", "Service destroyed");
     }
 
     @Override

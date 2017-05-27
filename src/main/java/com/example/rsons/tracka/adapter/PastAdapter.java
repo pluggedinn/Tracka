@@ -21,8 +21,8 @@ public class PastAdapter extends EpoxyAdapter {
     public PastAdapter() {
         enableDiffing();
 
+        toolbarModel = new ToolbarModel("-2");
         headerModel = new PastHeaderModel(this);
-        toolbarModel = new ToolbarModel("86");
 
         addModels(toolbarModel, headerModel);
 

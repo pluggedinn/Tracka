@@ -16,16 +16,18 @@
             android:id="@+id/toolbarImage"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ic_arrow_back_black_24dp" />
+            android:background="@drawable/ic_arrow_back_black_24dp"
+            android:backgroundTint="@color/secondary_text_material_light"/>
 
         <TextView
             android:id="@+id/toolbarText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:text="86"
+            android:text="-2"
             android:textSize="26sp"
-            android:textStyle="bold" />
+            android:textColor="@color/secondary_text_material_light"
+            fontPath="fonts/AvenirNextLTPro-Bold.otf"/>
 
     </android.support.v7.widget.Toolbar>
 

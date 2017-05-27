@@ -1,5 +1,6 @@
 package com.example.rsons.tracka;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
@@ -15,6 +16,8 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.rsons.tracka.adapter.PastAdapter;
 import com.squareup.timessquare.CalendarPickerView;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class PastActivity extends AppCompatActivity {
@@ -43,24 +46,9 @@ public class PastActivity extends AppCompatActivity {
         recyclerView.setAdapter(eAdapter);
     }
 
-//    public void showCalendar(View v) {
-//        Handler handler = new Handler();
-//
-//        if (calendar.getVisibility() == View.VISIBLE) {
-//            YoYo.with(Techniques.FadeOut)
-//                    .duration(500)
-//                    .playOn(calendar);
-//            handler.postDelayed(new Runnable(){
-//                @Override
-//                public void run(){
-//                    calendar.setVisibility(View.GONE);
-//                }
-//            }, 500);
-//        } else {
-//            YoYo.with(Techniques.FadeIn)
-//                .duration(500)
-//                .playOn(calendar);
-//            calendar.setVisibility(View.VISIBLE);
-//        }
-//    }
+    // pass context to Calligraphy
+    @Override
+    protected void attachBaseContext(Context context) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(context));
+    }
 }

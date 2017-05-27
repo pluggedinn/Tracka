@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.airbnb.epoxy.EpoxyModel;
 import com.example.rsons.tracka.R;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.view.SimpleDraweeView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
