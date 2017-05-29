@@ -125,7 +125,7 @@ public class FactsRetriever {
         else if (factId == 8) {
             long seconds = TimeUnit.MILLISECONDS.toSeconds(time);
             // it takes 5 seconds to type 'I love you' plus 15 seconds to find the person on the phone = 20 seconds
-            factString = "text 'I LOVE YOU' to " + seconds / 20 + " friends";
+            factString = "texted 'I LOVE YOU' to " + seconds / 20 + " friends";
         }
         // Climb mountains
         else if (factId == 9) {

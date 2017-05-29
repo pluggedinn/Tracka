@@ -23,10 +23,20 @@ public class MyReceiver extends BroadcastReceiver {
             context.startService(i);
         }
 
-        // Detecting screen on
+        // Detecting screen ON
         else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            Log.d("TrackaRecevier", "Screen on. Starting service");
+            Log.d("TrackaRecevier", "Screen ON. Starting service with handler on");
             Intent i = new Intent(context, SessionService.class);
+            i.setAction("1"); // 1 represents ACTION_START_HANDLER
+
+            context.startService(i);
+        }
+
+        // Detecting screen OFF
+        else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+            Log.d("TrackaRecevier", "Screen OFF. Starting service with handler off");
+            Intent i = new Intent(context, SessionService.class);
+            i.setAction("2"); // 2 represents ACTION_STOP_HANDLER
 
             context.startService(i);
         }
