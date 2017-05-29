@@ -121,11 +121,13 @@ public class SessionService extends IntentService {
 
         startForeground(1192, notification);
 
-        // Starting the loop that looks for apps opened and closed
+        // Starting the loop that looks for apps opened and closed depending on the event
         if (ACTION_START_HANDLER.equals(intent.getAction())) {
             startAppCheckerThread();
         } else if (ACTION_STOP_HANDLER.equals(intent.getAction())) {
             stopAppCheckerThread();
+        } else {
+            startAppCheckerThread();
         }
 
 

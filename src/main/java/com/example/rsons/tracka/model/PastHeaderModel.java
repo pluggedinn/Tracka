@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 public class PastHeaderModel extends EpoxyModel<RelativeLayout> {
     private PastAdapter eAdapter;
     private Context context;
+    private List<Date> selectedDates;
 
     @BindView(R.id.calendarView) CalendarPickerView calendar;
 
@@ -54,14 +55,16 @@ public class PastHeaderModel extends EpoxyModel<RelativeLayout> {
         previousDay.add(Calendar.DATE, -2);
         yesterday.add(Calendar.DATE, -1);
 
-        // Adding them to a list
-        List<Date> defaultDates = new ArrayList<>();
-        defaultDates.add(previousDay.getTime());
-        defaultDates.add(yesterday.getTime());
+        // Adding default dates to the calendar if not already set by the user
+        if (selectedDates == null) {
+            selectedDates = new ArrayList<>();
+            selectedDates.add(previousDay.getTime());
+            selectedDates.add(yesterday.getTime());
+        }
 
         calendar.init(lastYear.getTime(), today.getTime())
                 .inMode(CalendarPickerView.SelectionMode.RANGE)
-                .withSelectedDates(defaultDates);
+                .withSelectedDates(selectedDates);
 
         // Initializing session retriever
         final SessionsRetriever dataRetriever = new SessionsRetriever(context);
@@ -71,7 +74,7 @@ public class PastHeaderModel extends EpoxyModel<RelativeLayout> {
             public void onDateSelected(Date date) {
 
                 // getting selected dates
-                List<Date> selectedDates = calendar.getSelectedDates();
+                selectedDates = calendar.getSelectedDates();
 
                 // clearing adapter
                 eAdapter.clearApps();
@@ -89,7 +92,6 @@ public class PastHeaderModel extends EpoxyModel<RelativeLayout> {
                     Log.d("START", date.toString());
                     Log.d("END", dayAfter.getTime()+"");
                 } else {
-
                     Calendar lastDay = Calendar.getInstance();
                     lastDay.setTime(selectedDates.get(selectedDates.size() - 1));
                     lastDay.add(Calendar.DATE, 1);

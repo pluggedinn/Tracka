@@ -23,7 +23,6 @@ import java.io.File;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-// TODO: 4/25/2017 setting up custom font  
 public class MainActivity extends AppCompatActivity {
 
     TextView text1;

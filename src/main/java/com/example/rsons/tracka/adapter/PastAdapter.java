@@ -38,8 +38,10 @@ public class PastAdapter extends EpoxyAdapter {
     }
 
     public void clearApps() {
-        for(int i = 2; i < models.size(); i++) {
-            models.remove(i);
+        int currSize = models.size();
+
+        for(int i = 2; i < currSize; i++) {
+            models.remove(2);
         }
         notifyModelsChanged();
     }
