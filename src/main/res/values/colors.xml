@@ -6,4 +6,10 @@
     <color name="background_material_light">#cff09e</color>
     <color name="primary_text_material_light">#0b486b</color>
     <color name="secondary_text_material_light">#3b8686</color>
+
+    <color name="facebook">#3B5998</color>
+    <color name="instagram">#6B463C</color>
+    <color name="snapchat">#FFFC00</color>
+    <color name="twitter">#00ACED</color>
+    <color name="youtube">#DC482F</color>
 </resources>

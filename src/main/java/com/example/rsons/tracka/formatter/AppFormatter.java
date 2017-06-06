@@ -1,4 +1,4 @@
-package com.example.rsons.tracka.model;
+package com.example.rsons.tracka.formatter;
 
 import android.app.usage.UsageStats;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.content.Intent;
 import com.example.rsons.tracka.FactsRetriever;
 import com.example.rsons.tracka.R;
 import com.example.rsons.tracka.Utils;
+import com.example.rsons.tracka.model.App;
+import com.example.rsons.tracka.model.Session;
 
 import java.util.ArrayList;
 import java.util.HashMap;

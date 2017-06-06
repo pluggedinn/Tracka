@@ -27,4 +27,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PastActivity.class);
         startActivity(intent);
     }
+
+    public void clickTodayActivity(View v) {
+        Intent intent = new Intent(this, TodayActivity.class);
+        startActivity(intent);
+    }
 }

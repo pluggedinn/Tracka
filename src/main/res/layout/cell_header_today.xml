@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="12dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="52dp"
+        android:text="Tracka"
+        android:textColor="@color/colorAccent"
+        android:textSize="46sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        fontPath="fonts/AvenirNextLTPro-Bold.otf"/>
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginStart="55dp"
+        android:textSize="16sp"
+        android:text="Home"
+        android:textColor="@color/secondary_text_material_light"
+        fontPath="fonts/AvenirNextLTPro-Demi.otf"/>
+
+    <com.github.mikephil.charting.charts.HorizontalBarChart
+        android:id="@+id/hoursChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/subtitle"
+        android:layout_marginTop="44dp"></com.github.mikephil.charting.charts.HorizontalBarChart>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/accessesChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/hoursChart"
+        android:layout_marginTop="44dp"></com.github.mikephil.charting.charts.BarChart>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/timeAccessChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/accessesChart"
+        android:layout_marginTop="44dp"></com.github.mikephil.charting.charts.LineChart>
+
+</RelativeLayout>

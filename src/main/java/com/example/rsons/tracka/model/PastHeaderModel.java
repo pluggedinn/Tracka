@@ -3,14 +3,13 @@ package com.example.rsons.tracka.model;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.CalendarView;
 import android.widget.RelativeLayout;
 
-import com.airbnb.epoxy.EpoxyAdapter;
 import com.airbnb.epoxy.EpoxyModel;
 import com.example.rsons.tracka.R;
 import com.example.rsons.tracka.SessionsRetriever;
 import com.example.rsons.tracka.adapter.PastAdapter;
+import com.example.rsons.tracka.formatter.AppFormatter;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.util.ArrayList;
@@ -111,8 +110,5 @@ public class PastHeaderModel extends EpoxyModel<RelativeLayout> {
 
             }
         });
-    }
-
-    public void passAdapter(PastAdapter pastAdapter) {
     }
 }

@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
+import com.example.rsons.tracka.model.Session;
+
 import java.util.Calendar;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -42,5 +45,14 @@ public class Utils {
         int mMinute = calendar.get(Calendar.MINUTE);
 
         return String.format("%02d:%02d:%02d %02d:%02d", mMonth, mDay, mYear, mHour, mMinute);
+    }
+
+    public static long convertSessionsToMinutes(List<Session> sessions) {
+        long total = 0;
+        for(int i = 0; i < sessions.size(); i++) {
+            total += sessions.get(i).endTime - sessions.get(i).startTime;
+        }
+
+        return TimeUnit.MILLISECONDS.toMinutes(total);
     }
 }

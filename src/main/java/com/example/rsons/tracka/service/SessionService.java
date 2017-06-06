@@ -87,17 +87,19 @@ public class SessionService extends IntentService {
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
 
         // Checking if ACTION_STOP_SERVICE event is triggered
-        if (ACTION_STOP_SERVICE.equals(intent.getAction())) {
-            Log.d("TrackaService","...called to cancel service...");
+        if (intent != null) {
+            if (ACTION_STOP_SERVICE.equals(intent.getAction())) {
+                Log.d("TrackaService", "...called to cancel service...");
 
-            // Deleting foreground notification
-            NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            mNotifyMgr.cancel(1192);
+                // Deleting foreground notification
+                NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                mNotifyMgr.cancel(1192);
 
-            // Stopping service and calling onDestroy()
-            stopSelf();
-            Log.d("TrackaService", "...returning start_not_sticky");
-            return START_NOT_STICKY;
+                // Stopping service and calling onDestroy()
+                stopSelf();
+                Log.d("TrackaService", "...returning start_not_sticky");
+                return START_NOT_STICKY;
+            }
         }
 
         // ... continuing with the execution of the Service
